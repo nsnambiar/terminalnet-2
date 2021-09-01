@@ -2,11 +2,9 @@ from flask import Flask, render_template, redirect, url_for, flash,abort,request
 from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from db import *
-from authlib.integrations.flask_client import OAuth
 
 
 app=Flask(__name__)
-oauth=OAuth(app)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
