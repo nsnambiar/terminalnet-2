@@ -13,11 +13,11 @@ db.init_app(app)
 ckeditor=CKEditor(app)
 
 
-oauth=OAuth(app)
+oauth=OAuth()
 import os
 
 
-google = oauth.register(
+google = oauth.remote_app(
     name = 'google',
     client_id = os.environ['GOOGLE_CLIENT_ID'],
     client_secret = os.environ['GOOGLE_CLIENT_SECRET'],
