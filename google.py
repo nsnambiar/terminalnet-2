@@ -1,4 +1,4 @@
-from authlib.integrations.flask_client import OAuth
+from flask_oauthlib.client import OAuth
 from main import app,request,db
 oauth=OAuth(app)
 import os

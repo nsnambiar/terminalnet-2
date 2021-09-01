@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash,abort,request
 from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from db import *
-from flask_oauthlib.client import OAuth
+from google import *
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
