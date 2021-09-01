@@ -1,0 +1,72 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "header.html" %}
+<article class="blog-post px-3 py-5 p-md-5">
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6119407c32c4190013251a55&product=inline-share-buttons' async='async'></script>
+    {% if all_post.img %}
+		    <div class="container">
+			     <center><header class="blog-post-header">
+				    <h2 class="title mb-2">{{all_post.title}}}</h2>
+				    <div class="meta mb-3"><h6 class="date">Published on {{all_post.date}}.Published By {{all_post.author.name}} </h6></div>
+				 </header> </center>
+			    <div class="blog-post-body">
+				    <center><figure class="blog-banner">
+				        <a href=""><img  src="data:;base64,{{all_post.img|b64encode}}"  class="block" width="500" height="250" ></a>
+				    </figure>
+                    <h5 class="title mb-2">{{all_post.subtitle}}}</h5>
+                    </center><div class="boxed">
+                    <p>{{all_post.body|safe}}</p></div>
+		    </div><!--//container-->
+                <br>
+				  <div class="row">
+                            <div class="col-md-12">
+                                <nav aria-label="Page navigation">
+                                    <h4>Leave a Comment</h4>
+                                  <div class="">
+                                  {{ wtf.quick_form(comment, novalidate=True, button_map={"submit": "primary"}) }}
+                                   </div>
+                                    <br>
+                    <ul class="commentList">
+                            <div class="commenterImage">
+                                {% for comment in all_post.comments|reverse: %}
+                            <div class="commentText">
+                                 <i class="fa fa-comment"></i>.{{comment.text|safe}}<br>
+                                <span class="date sub-text"><i class="fa fa-user"></i>.{{comment.comment_author.name}} <i class="fa fa-envelope"></i>{{comment.comment_author.email}}</span>
+                            </div>
+                                <hr>
+                                {%endfor%}
+                    </ul>
+                                    {% else %}
+                                    		    <div class="container">
+			     <center><header class="blog-post-header">
+				    <h2 class="title mb-2">{{all_post.title}}}</h2>
+				    <div class="meta mb-3"><span class="date">Published 3 months ago</span><span class="time">5 min read</span><span class="comment"><a href="#">4 comments</a></span></div>
+				 </header> </center>
+			    <div class="blog-post-body">
+                    <h5 class="title mb-2">{{all_post.subtitle}}}</h5>
+                    </center><div class="boxed">
+                    <p>{{all_post.body|safe}}</p></div>
+		    </div><!--//container-->
+				  <div class="row">
+                            <div class="col-md-12">
+                                <nav aria-label="Page navigation">
+                                    <h4>Leave a Comment</h4>
+                                  <div class="">
+                                  {{ wtf.quick_form(comment, novalidate=True, button_map={"submit": "primary"}) }}
+                                   </div>
+                                    <br>
+                    <ul class="commentList">
+                            <div class="commenterImage">
+                                {% for comment in all_post.comments|reverse: %}
+                            <b><div class="commentText">
+                                <i class="fa fa-pencil"></i>.{{comment.text|safe}}<br></b>
+                                <span class="date sub-text"><i class="fa fa-user"></i>. {{comment.comment_author.name}}-({{comment.comment_author.email}})</span>
+                            </div>
+                                <hr>
+                                {%endfor%}
+                    </ul>
+                                    {% endif %}
+
+
+	    </article>
+
+{% include "footer.html" %}

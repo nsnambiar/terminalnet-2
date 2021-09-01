@@ -1,0 +1,10 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+{% include "header.html" %}
+<div class="container">
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name='body') }}
+        {{ wtf.quick_form(issueform, novalidate=True, button_map={"submit": "primary"})}}
+</div>
+{% include "footer.html" %}
+{% endblock %}

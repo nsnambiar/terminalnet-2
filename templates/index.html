@@ -1,0 +1,198 @@
+{% include "header.html" %}
+<style xmlns="http://www.w3.org/1999/html">.avatar {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}</style>
+{% if not all_post %}
+<section class="section wb">
+            <div class="container">
+              <br><br>
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-list clearfix">
+                                <div class="blog-box row">
+		    <div class="item mb-5">
+                 </div><!--//media-->
+                <img class="img-fluid" src="https://cdn.dribbble.com/users/1145907/screenshots/5776832/searching_-_no_results_2x.png?compress=1&resize=400x300"  width="500" height="250"  >
+		    </div><!--//item-->
+			    <div class="media">
+                </div>
+								</div><!-- end blog-box -->
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+                        <div class="row">
+                        </div><!-- end row -->
+                     <center>
+                        {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
+                                    {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                                <h3  class ="widget-title">Recent Questions</h3>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="scrollme">
+                                           {% for post in issue_post %}
+                                            <div class="w-100 justify-content-between">
+                                                  <hr>
+                                                <td style="">
+                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6> {{post.title}}</h6></a>
+                                                </td>
+                                                <i class="fa fa-calculator"></i>-{{post.date}}
+                                                <i class="fa fa-user"></i>-{{post.author.name}}
+                                                <br><br>
+                                            {%endfor%}
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+{% elif all_post.items %}
+ <section class="section wb">
+            <div class="container">
+               <div class="main-box-head">
+              <br><br>
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-list clearfix">
+                                <center><u><h2 class="main-box-title">Latest Articles</h2></u></center>
+                                <div class="blog-box row">
+								 {% for post in all_post.items %}
+		    <div class="item mb-5">
+			    <div class="media">
+				    <img alt="." class="avatar" src="data:;base64,{{post.img|b64encode}}">
+				    <div class="media-body">
+					    <h3 class="title mb-1"><a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}">{{post.title}}</a></h3>
+					    <div class="meta mb-1"><span class="date">Published on {{post.date}}</span><span class=""></span><span class=""><a href=""></a></span></div>
+					    <div class="intro">{{post.subtitle}}</div>
+                        <a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}"><button type="submit" class="btn btn-primary">Read more</button></a>
+                        <hr>
+				    </div><!--//media-body-->
+			    </div><!--//media-->
+		    </div><!--//item-->
+			{% endfor %}
+                                </div><!-- end blog-box -->
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+                        <div class="row">
+                        </div>
+
+                        {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
+                                    {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
+
+                    </div><!-- end col -->
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                         <h3 class ="widget-title">Recent Questions</h3>
+                        <div class="sidebar">
+
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="scrollme">
+                                            {% for post in issue_post %}
+                                            <div class="w-100 justify-content-between">
+                                                  <hr>
+                                                <td style="">
+                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6> {{post.title}}</h6></a>
+                                                </td>
+                                                <i class="fa fa-calculator"></i>-{{post.date}}
+                                                <i class="fa fa-user"></i>-{{post.author.name}}
+
+                                                <br><br>
+
+                                            {%endfor%}
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+
+        </section>
+
+
+<br><br><br>
+{% elif all_post %}
+<section class="section wb">
+            <div class="container">
+              <br><br>
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-list clearfix">
+                                <div class="blog-box row">
+								 {% for post in all_post %}
+		    <div class="item mb-5">
+			    <div class="media">
+				    <img alt="." class="avatar" src="data:;base64,{{post.img|b64encode}}">
+				    <div class="media-body">
+					    <h3 class="title mb-1"><a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}">{{post.title}}</a></h3>
+					    <div class="meta mb-1"><span class="date">Published on {{post.date}}</span><span class=""></span><span class=""><a href=""></a></span></div>
+					    <div class="intro">{{post.subtitle}}</div>
+                        <a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}"><button type="submit" class="btn btn-primary">Read more</button></a>
+                        <hr>
+				    </div><!--//media-body-->
+			    </div><!--//media-->
+		    </div><!--//item-->
+			{% endfor %}
+                                </div><!-- end blog-box -->
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+                        <div class="row">
+                        </div>
+
+                        {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
+                                    {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
+
+                    </div><!-- end col -->
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                                <h3 class ="widget-title">Recent Questions</h3>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="scrollme">
+                                            {% for post in issue_post %}
+                                            <div class="w-100 justify-content-between">
+                                                  <hr>
+                                                <td style="">
+                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6> {{post.title}}</h6></a>
+                                                </td>
+                                                <i class="fa fa-calculator"></i>-{{post.date}}
+                                                <i class="fa fa-user"></i>-{{post.author.name}}
+
+                                                <br><br>
+
+                                            {%endfor%}
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+
+        </section>
+
+
+<br><br><br>
+{% endif%}
+{% include "footer.html" %}
