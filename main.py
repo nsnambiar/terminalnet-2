@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash,abort,request
 from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from db import *
-from google import *
+from flask_oauthlib.client import OAuth
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -11,6 +11,24 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 ckeditor=CKEditor(app)
+
+
+oauth=OAuth(app)
+import os
+
+
+google = oauth.register(
+    name = 'google',
+    client_id = os.environ['GOOGLE_CLIENT_ID'],
+    client_secret = os.environ['GOOGLE_CLIENT_SECRET'],
+    access_token_url = 'https://accounts.google.com/o/oauth2/token',
+    access_token_params = None,
+    authorize_url = 'https://accounts.google.com/o/oauth2/auth',
+    authorize_params = None,
+    api_base_url = 'https://www.googleapis.com/oauth2/v1/',
+    userinfo_endpoint = 'https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
+    client_kwargs = {'scope': 'openid email profile'},
+)
 
 
 # login_manager=LoginManager()
