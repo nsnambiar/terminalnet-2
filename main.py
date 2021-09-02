@@ -4,6 +4,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from db import *
 from forms import *
 from authlib.integrations.flask_client import OAuth
+from datetime import *
 import os
 
 app=Flask(__name__)
@@ -90,6 +91,31 @@ def logout():
     logout_user()
     return redirect(url_for('view', page=1))
 
+@app.route("/new-post", methods=["GET", "POST"])
+def add_new_post():
+    if current_user.is_authenticated:
+        form = CreatePostForm()
+        if form.validate_on_submit():
+            pic = request.files['image']
+            # if not pic:
+            #     return 'No pic uploaded!', 400
+            mimetype = pic.mimetype
+            new_post = BlogPost(
+                title=form.title.data,
+                subtitle=form.subtitle.data,
+                body=form.body.data,
+                img=pic.read(),
+                filetype=mimetype,
+                author=current_user,
+                date=date.today().strftime("%b,%d,%Y"),
+            )
+            db.session.add(new_post)
+            db.session.commit()
+            return redirect(url_for("start"))
+    else:
+        flash("You need to login to Add New Post.")
+        return redirect(url_for("login"))
+    return render_template("addpost.html", form=form)
 
 
 
