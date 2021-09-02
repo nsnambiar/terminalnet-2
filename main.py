@@ -141,6 +141,41 @@ def issue():
 
     return render_template("addissue.html",currentuser=current_user,issueform=issueform)
 
+@app.route("/issue:<post_id>", methods=["GET", "POST"])
+def issues(post_id):
+    comment = CommentForm()
+    issuepost = IssueBlogPost.query.get(post_id)
+    if comment.validate_on_submit():
+        if not current_user.is_authenticated:
+            flash("You need to login or register to comment.")
+            return redirect(url_for("login"))
+        new_comment = IssueComment(
+            text=comment.comment_text.data,
+            comment_author=current_user,
+            parent_post=issuepost
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+    return render_template("blog-posst.html",all_post=issuepost,comment=comment)
+
+@app.route("/<int:post_id>", methods=["GET", "POST"])
+def show_blog(post_id):
+    comment = CommentForm()
+    request_post = BlogPost.query.get(post_id)
+    if comment.validate_on_submit():
+        if not current_user.is_authenticated:
+            flash("You need to login or register to comment.")
+            return redirect(url_for("login"))
+        new_comment = Comment(
+            text=comment.comment_text.data,
+            comment_author=current_user,
+            parent_post=request_post
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+    return render_template("blog-posst.html",all_post=request_post,comment=comment)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
