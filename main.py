@@ -41,10 +41,9 @@ def b64encode(data):
 app.jinja_env.filters['b64encode'] = b64encode
 
 
-
-# @login_manager.user_loader()
-# def load_user(user_id):
-#     return User.query.get(str(user_id))
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 
