@@ -6,6 +6,7 @@ from forms import *
 from authlib.integrations.flask_client import OAuth
 from datetime import *
 from sqlalchemy import desc
+import base64
 import os
 
 app=Flask(__name__)
@@ -34,9 +35,18 @@ google = oauths.register(
 login_manager=LoginManager()
 login_manager.init_app(app)
 
-@login_manager.user_loader()
-def load_user(user_id):
-    return User.query.get(str(user_id))
+# @app.template_filter('b64encode')
+def b64encode(data):
+    return base64.b64encode(data).decode()
+app.jinja_env.filters['b64encode'] = b64encode
+
+
+
+# @login_manager.user_loader()
+# def load_user(user_id):
+#     return User.query.get(str(user_id))
+
+
 
 @app.route('/',methods=["GET","POST"])
 def start():
