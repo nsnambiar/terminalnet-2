@@ -1,9 +1,10 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% include "header.html" %}
 <article class="blog-post px-3 py-5 p-md-5">
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6119407c32c4190013251a55&product=inline-share-buttons' async='async'></script>
     {% if all_post.img %}
 		    <div class="container">
+                 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6119407c32c4190013251a55&product=inline-share-buttons' async='async'></script>
+
 			     <center><header class="blog-post-header">
 				    <h2 class="title mb-2">{{all_post.title}}}</h2>
 				    <div class="meta mb-3"><h6 class="date">Published on {{all_post.date}}.Published By {{all_post.author.name}} </h6></div>
@@ -13,7 +14,7 @@
 				        </figure>
                     <h5 class="title mb-2">{{all_post.subtitle}}}</h5>
                     </center><div class="boxed">
-                      <a href=""><img  src="data:;base64,{{all_post.img|b64encode}}"  class="block" width="500" height="250" ></a>
+                      <a href=""><img  src="data:;base64,{{all_post.img|b64encode}}"  class="img-fluid" width="500" height="250" align="center"></a>
                     <p>{{all_post.body|safe}}</p></div>
 		    </div><!--//container-->
                 <br>
