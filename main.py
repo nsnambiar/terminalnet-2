@@ -31,8 +31,8 @@ google = oauths.register(
 )
 
 
-login_manager=LoginManager()
-login_manager.init_app(app)
+# login_manager=LoginManager()
+# login_manager.init_app(app)
 
 @login_manager.user_loader()
 def load_user(user_id):
@@ -176,17 +176,6 @@ def show_blog(post_id):
         db.session.commit()
     return render_template("blog-posst.html",all_post=request_post,comment=comment)
 
-
-
-
-@app.route("/search", methods=['POST'])
-def search():
-    if request.method == 'POST':
-        search = request.form['search']
-        search_query = BlogPost.query.filter(BlogPost.title.contains('%' + search.title() + '%')).all()
-        issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
-        print(search_query)
-        return render_template("index.html", all_post=search_query, issue_post=issues)
 
 
 if __name__ == "__main__":
