@@ -190,7 +190,7 @@ def search():
 
 @app.route('/login/google')
 def google_login():
-    google = oauth.create_client('google')
+    google = oauths.create_client('google')
     redirect_uri = url_for('google_authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
 
@@ -198,7 +198,7 @@ def google_login():
 # Google authorize route
 @app.route('/login/google/authorize')
 def google_authorize():
-    google = oauth.create_client('google')
+    google = oauths.create_client('google')
     token = google.authorize_access_token()
     resp = google.get('userinfo').json()
     usersemail=User.query.filter_by(email=resp['email']).first()
