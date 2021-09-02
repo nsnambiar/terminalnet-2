@@ -54,6 +54,21 @@ def view(page):
 
 
 
+@app.route("/Registration",methods=["GET","POST"])
+def registration():
+    Reg_form = RegisterForm()
+    if Reg_form.validate_on_submit():
+        new_user = User(email=Reg_form.email.data, name=Reg_form.name.data)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for("start"))
+    return render_template("registration.html", form=Reg_form, current_user=current_user)
+
+
+
+
+
 @app.route('/login',methods=["GET","POST"])
 def login():
     form=Login()
@@ -70,6 +85,12 @@ def login():
             login_user(checking)
             return redirect(url_for('start'))
     return render_template("login.html",form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('view', page=1))
+
 
 
 
