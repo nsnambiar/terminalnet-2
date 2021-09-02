@@ -118,6 +118,29 @@ def add_new_post():
     return render_template("addpost.html", form=form)
 
 
+@app.route("/upload-issue",methods=["GET","POST"])
+def issue():
+    if current_user.is_authenticated:
+        issueform = CreateissueForm()
+        if issueform.validate_on_submit():
+            pic = request.files['image']
+            # if not pic:
+            #     return 'No pic uploaded!', 400
+            new_post = IssueBlogPost(
+                title=issueform.title.data,
+                body=issueform.body.data,
+                img=pic.read(),
+                author=current_user,
+                date=date.today().strftime("%b %d, %Y"),
+            )
+            db.session.add(new_post)
+            db.session.commit()
+    else:
+            flash("You need to login to Raise issue.")
+            return redirect(url_for("login"))
+
+    return render_template("addissue.html",currentuser=current_user,issueform=issueform)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
