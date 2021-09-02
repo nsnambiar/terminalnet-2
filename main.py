@@ -188,5 +188,30 @@ def search():
         return render_template("index.html", all_post=search_query, issue_post=issues)
 
 
+@app.route('/login/google')
+def google_login():
+    google = oauth.create_client('google')
+    redirect_uri = url_for('google_authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+
+# Google authorize route
+@app.route('/login/google/authorize')
+def google_authorize():
+    google = oauth.create_client('google')
+    token = google.authorize_access_token()
+    resp = google.get('userinfo').json()
+    usersemail=User.query.filter_by(email=resp['email']).first()
+    if not usersemail:
+        new_user = User(email=resp['email'], name=resp['given_name'])
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for("start"))
+    else:
+        login_user(usersemail)
+        return redirect(url_for("start"))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
