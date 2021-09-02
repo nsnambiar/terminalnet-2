@@ -5,15 +5,15 @@ from flask_ckeditor import CKEditorField
 
 
 class CreatePostForm(FlaskForm):
-    title = StringField("Blog Post Title", validators=[DataRequired()])
-    subtitle = StringField("Subtitle", validators=[DataRequired()])
+    title = StringField("Blog Post Title *", validators=[DataRequired()])
+    subtitle = StringField("Subtitle *", validators=[DataRequired()])
     image = FileField('Upload Image')
     body = CKEditorField("Blog Content", validators=[DataRequired()])
     submit = SubmitField("Submit Post")
 
 class CreateissueForm(FlaskForm):
-    title = StringField("Issue Title", validators=[DataRequired()])
-    body = CKEditorField("Issue Body", validators=[DataRequired()])
+    title = StringField("Issue Title *", validators=[DataRequired()])
+    body = CKEditorField("Issue Body *", validators=[DataRequired()])
     image = FileField('Upload Image')
     submit = SubmitField("Submit Issue")
 

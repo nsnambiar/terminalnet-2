@@ -2,6 +2,7 @@
 {% block content %}
 {% include "header.html" %}
 <div class="container">
+        <center> <h4>Ask a public question </h4></center>
         {{ ckeditor.load() }}
         {{ ckeditor.config(name='body') }}
         {{ wtf.quick_form(issueform, novalidate=True, button_map={"submit": "primary"})}}
