@@ -5,6 +5,7 @@ from db import *
 from forms import *
 from authlib.integrations.flask_client import OAuth
 from datetime import *
+from sqlalchemy import desc
 import os
 
 app=Flask(__name__)
@@ -30,12 +31,12 @@ google = oauths.register(
 )
 
 
-# login_manager=LoginManager()
-# login_manager.init_app(app)
-#
-# @login_manager.user_loader()
-# def load_user(user_id):
-#     return User.query.get(str(user_id))
+login_manager=LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader()
+def load_user(user_id):
+    return User.query.get(str(user_id))
 
 @app.route('/',methods=["GET","POST"])
 def start():
