@@ -68,7 +68,6 @@ def registration():
 
 
 
-
 @app.route('/login',methods=["GET","POST"])
 def login():
     form=Login()
