@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash,abort,request
 from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from db import *
+from forms import *
 from authlib.integrations.flask_client import OAuth
 import os
 
@@ -49,6 +50,28 @@ def view(page):
     posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
     return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
+
+
+
+
+@app.route('/login',methods=["GET","POST"])
+def login():
+    form=Login()
+    if form.validate_on_submit():
+        email = form.email.data
+        name = form.name.data
+        checking = User.query.filter_by(email=email).first()
+        if not checking:
+            flash('Username or Email incorrect, please try again.')
+            return redirect(url_for('login'))
+        elif checking.name != name:
+            flash('Username or Email incorrect, please try again.')
+        else:
+            login_user(checking)
+            return redirect(url_for('start'))
+    return render_template("login.html",form=form)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
