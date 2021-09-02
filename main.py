@@ -3,6 +3,7 @@ from flask_ckeditor import CKEditor
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from db import *
 from authlib.integrations.flask_client import OAuth
+import os
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -15,8 +16,8 @@ ckeditor=CKEditor(app)
 oauths = OAuth(app)
 google = oauths.register(
     name = 'google',
-    client_id = "175887749203-gdtkc1h93svnal7gspl415t24ggfd5be.apps.googleusercontent.com",
-    client_secret = "90KgzC26EfXluVqju8LJkRrA",
+    client_id = os.environ['GOOGLE_CLIENT_ID'],
+    client_secret = os.environ['GOOGLE_CLIENT_SECRET'],
     access_token_url = 'https://accounts.google.com/o/oauth2/token',
     access_token_params = None,
     authorize_url = 'https://accounts.google.com/o/oauth2/auth',
