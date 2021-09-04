@@ -2,8 +2,8 @@
 <style xmlns="http://www.w3.org/1999/html">
 .avatar {
   vertical-align: middle;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 }
 
@@ -76,7 +76,7 @@
 								 {% for post in all_post.items %}
 		    <div class="item mb-5">
 			    <div class="media">
-				    <img alt="." class="avatar" src="{{post.author_id.img}}">
+				    <img alt="." class="avatar" src="{{post.author.img}}">
 				    <div class="media-body">
 					    <h3 class="title mb-1"><a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}">{{post.title}}</a></h3>
 					    <div class="meta mb-1"><span class="date">Published on {{post.date}}</span><span class=""></span><span class=""><a href=""></a></span></div>
