@@ -9,6 +9,7 @@ class User(UserMixin,db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
+    img=db.Column(db.Text)
     posts = relationship("BlogPost", back_populates="author")
     issueposts=relationship("IssueBlogPost", back_populates="author")
     comments = relationship("Comment", back_populates="comment_author")

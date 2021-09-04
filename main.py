@@ -68,8 +68,9 @@ def view(page):
 @app.route("/Registration",methods=["GET","POST"])
 def registration():
     Reg_form = RegisterForm()
+    img=0
     if Reg_form.validate_on_submit():
-        new_user = User(email=Reg_form.email.data, name=Reg_form.name.data)
+        new_user = User(email=Reg_form.email.data, name=Reg_form.name.data,img=img)
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
@@ -212,7 +213,7 @@ def google_authorize():
     resp = google.get('userinfo').json()
     usersemail=User.query.filter_by(email=resp['email']).first()
     if not usersemail:
-        new_user = User(email=resp['email'], name=resp['given_name'])
+        new_user = User(email=resp['email'], name=resp['given_name'],img=resp['picture'])
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
