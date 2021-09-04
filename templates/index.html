@@ -7,7 +7,6 @@
   border-radius: 50%;
 }
 
-
 </style>
 {% if not all_post %}
 <section class="section wb">
@@ -72,12 +71,109 @@
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-wrapper">
                             <div class="blog-list clearfix">
-                                <center><h2 class="main-box-title">Latest Articles</h2></center><br><br>
+
                                 <div class="blog-box row">
 								 {% for post in all_post.items %}
 		    <div class="item mb-5">
 			    <div class="media">
-				    <img alt="." class="avatar" src="data:;base64,{{post.img|b64encode}}">
+				    <img alt="." class="avatar" src="{{post.author_id.img}}">
+				    <div class="media-body">
+					    <h3 class="title mb-1"><a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}">{{post.title}}</a></h3>
+					    <div class="meta mb-1"><span class="date">Published on {{post.date}}</span><span class=""></span><span class=""><a href=""></a></span></div>
+					    <div class="intro">{{post.subtitle}}</div>
+                        <a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}"><button type="submit" class="btn btn-primary">Read more</button></a>
+                        <hr>
+				    </div><!--//media-body-->
+			    </div><!--//media-->
+		    </div><!--//item-->
+			{% endfor %}
+                                </div><!-- end blog-box -->
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+                        <div class="row">
+                        </div>
+
+                        {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
+                                    {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
+
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <h3 class="example2">Recent Questions</h3>
+                        <div class="sidebar">
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="example">
+                                            {% for post in issue_post %}
+                                            <div class="w-100 justify-content-between">
+                                                  <hr>
+
+                                                <td style="">
+                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6><p class="p"> {{post.title}}</h6></a>
+                                                </td></p>
+                                                <p class="p"><i class="fa fa-calculator"></i>-{{post.date}}
+                                                    <i class="fa fa-user"></i>-{{post.author.name}}</p>
+                                            {%endfor%}
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    <br>
+
+
+ <div class="example1">
+                       <center><i class="fa fa-download" aria-hidden="true"></i><hp class ="">.Download Zone</hp></center><hr class="new5">
+                        <div class="sidebar">
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        <div class="example1">
+                                            {% for post in issue_post %}
+                                            <div class="w-100 justify-content-between">
+
+                                                <td style="">
+                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6><p class="p"> {{post.title}}</h6></a>
+                                                </td></p>
+                                                <p class="p"><i class="fa fa-calculator"></i>-{{post.date}}
+                                                    <i class="fa fa-user"></i>-{{post.author.name}}</p>
+                                            {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+        </section>
+</div>
+
+
+
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+
+
+
+
+{% elif all_post %}
+<section class="section wb" >
+            <div class="container">
+               <div class="main-box-head">
+              <br><br>
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-list clearfix">
+
+                                <div class="blog-box row">
+								 {% for post in all_post.items %}
+		    <div class="item mb-5">
+			    <div class="media">
+				    <img alt="." class="avatar" src="{{post.author_id.img}}">
 				    <div class="media-body">
 					    <h3 class="title mb-1"><a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}">{{post.title}}</a></h3>
 					    <div class="meta mb-1"><span class="date">Published on {{post.date}}</span><span class=""></span><span class=""><a href=""></a></span></div>
@@ -150,98 +246,6 @@
                             </div><!-- end widget -->
                         </div><!-- end sidebar -->
                     </div><!-- end col -->
-        </section>
-
-
-<br><br><br>
-
-
-
-{% elif all_post %}
-<section class="section wb" >
-            <div class="container">
-               <div class="main-box-head">
-              <br><br>
-                <div class="row">
-                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                        <div class="page-wrapper">
-                            <div class="blog-list clearfix">
-                                <center><h2 class="main-box-title">Latest Articles</h2></center><br><br>
-                                <div class="blog-box row">
-								 {% for post in all_post.items %}
-		    <div class="item mb-5">
-			    <div class="media">
-				    <img alt="." class="avatar" src="data:;base64,{{post.img|b64encode}}">
-				    <div class="media-body">
-					    <h3 class="title mb-1"><a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}">{{post.title}}</a></h3>
-					    <div class="meta mb-1"><span class="date">Published on {{post.date}}</span><span class=""></span><span class=""><a href=""></a></span></div>
-					    <div class="intro">{{post.subtitle}}</div>
-                        <a href="{{url_for('show_blog',post_id=post.id,subtitle=post.subtitle) }}"><button type="submit" class="btn btn-primary">Read more</button></a>
-                        <hr>
-				    </div><!--//media-body-->
-			    </div><!--//media-->
-		    </div><!--//item-->
-			{% endfor %}
-                                </div><!-- end blog-box -->
-                            </div><!-- end blog-list -->
-                        </div><!-- end page-wrapper -->
-                        <div class="row">
-                        </div>
-
-                        {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
-                                    {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
-
-                    </div><!-- end col -->
-                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                         <h3 class ="widget-title">Recent Questions</h3>
-                        <div class="sidebar">
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        <div class="example">
-                                            {% for post in issue_post %}
-                                            <div class="w-100 justify-content-between">
-                                                  <hr>
-
-                                                <td style="">
-                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6><p class="p"> {{post.title}}</h6></a>
-                                                </td></p>
-                                                <p class="p"><i class="fa fa-calculator"></i>-{{post.date}}
-                                                    <i class="fa fa-user"></i>-{{post.author.name}}</p>
-                                            {%endfor%}
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- end blog-list -->
-                            </div><!-- end widget -->
-                        </div><!-- end sidebar -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-<hr>
-                         <h3 class ="widget-title">Download Zone</h3>
-                        <div class="sidebar">
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        <div class="example1">
-                                            {% for post in issue_post %}
-                                            <div class="w-100 justify-content-between">
-                                                  <hr>
-                                                <td style="">
-                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6><p class="p"> {{post.title}}</h6></a>
-                                                </td></p>
-                                                <p class="p"><i class="fa fa-calculator"></i>-{{post.date}}
-                                                    <i class="fa fa-user"></i>-{{post.author.name}}</p>
-                                            {%endfor%}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- end blog-list -->
-                            </div><!-- end widget -->
-                        </div><!-- end sidebar -->
-                    </div><!-- end col -->
-
         </section>
 
 
