@@ -97,5 +97,43 @@ height:50px;
   display: inline-block;
   padding: 8px 16px;
 }
-
+.example {
+  background-color: #fdbc6e;
+  width: 300px;
+  height: 300px;
+  padding: 8px;
+  border: ;
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.example1 {
+  background-color: #a3ff93;
+  width: 300px;
+  height: 300px;
+  padding: 8px;
+  border: ;
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+.example1 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.example2 {
+  background-color: #a3ff93;
+  width: 300px;
+  padding: 8px;
+  border: ;
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+.example2 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+hr.new5 {
+  border: 5px solid green;
+  border-radius: 1px;
+}
 
