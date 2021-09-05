@@ -102,30 +102,19 @@ height:50px;
   width: 300px;
   height: 300px;
   padding: 8px;
-  border: ;
+  border-radius: 25px;
   overflow-y: scroll; /* Add the ability to scroll */
 }
 .example {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-.example1 {
-  background-color: #a3ff93;
-  width: 300px;
-  height: 300px;
-  padding: 8px;
-  border: ;
-  overflow-y: scroll; /* Add the ability to scroll */
-}
-.example1 {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+
 .example2 {
-  background-color: #a3ff93;
+  background-color: #42c257;
   width: 300px;
   padding: 8px;
-  border: ;
+  border-radius: 25px;
   overflow-y: scroll; /* Add the ability to scroll */
 }
 .example2 {

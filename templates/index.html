@@ -99,7 +99,7 @@
                     </div><!-- end col -->
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                        <h3 class="example2">Recent Questions</h3>
+                        <center><h3 style="color:white;" class="example2">Top Questions </h3></center>
                         <div class="sidebar">
                                 <div class="blog-list-widget">
                                     <div class="list-group">
@@ -124,30 +124,11 @@
                         </div><!-- end sidebar -->
                     <br>
 
-
+ <img alt="" width="290" src="/static/assets/images/download.jpg">
  <div class="example1">
-                       <center><i class="fa fa-download" aria-hidden="true"></i><hp class ="">.Download Zone</hp></center><hr class="new5">
-                        <div class="sidebar">
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        <div class="example1">
-                                            {% for post in issue_post %}
-                                            <div class="w-100 justify-content-between">
 
-                                                <td style="">
-                                                   <a href="{{url_for('issues',post_id=post.id)}}"><h6><p class="p"> {{post.title}}</h6></a>
-                                                </td></p>
-                                                <p class="p"><i class="fa fa-calculator"></i>-{{post.date}}
-                                                    <i class="fa fa-user"></i>-{{post.author.name}}</p>
-                                            {%endfor%}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- end blog-list -->
-                            </div><!-- end widget -->
-                        </div><!-- end sidebar -->
                     </div><!-- end col -->
-        </section>
+
 </div>
 
 
@@ -156,7 +137,7 @@
                 </div><!-- end row -->
             </div><!-- end container -->
 
-
+  </section>
 
 
 {% elif all_post %}
