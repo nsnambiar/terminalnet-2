@@ -19,7 +19,7 @@
                                 <div class="blog-box row">
 		    <div class="item mb-5">
                  </div><!--//media-->
-                <img class="img-fluid" src="https://cdn.dribbble.com/users/1145907/screenshots/5776832/searching_-_no_results_2x.png?compress=1&resize=400x300"  width="500" height="250"  >
+                <img class="img-fluid" src="https://cdn.dribbble.com/users/1145907/screenshots/5776832/searching_-_no_results_2x.png?compress=1&resize=400x300"  width="700" height="1350"  >
 		    </div><!--//item-->
 			    <div class="media">
                 </div>
@@ -32,6 +32,7 @@
                         {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
                                     {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
                     </div><!-- end col -->
+            </div>
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
@@ -95,7 +96,7 @@
 
                         {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
                                     {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
-
+                        <br>
                     </div><!-- end col -->
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
@@ -107,24 +108,24 @@
                                             {% for post in issue_post %}
                                             <div class="w-100 justify-content-between">
                                                   <hr>
-
                                                 <td style="">
                                                    <a href="{{url_for('issues',post_id=post.id)}}"><h6><p class="p"> {{post.title}}</h6></a>
                                                 </td></p>
                                                 <p class="p"><i class="fa fa-calculator"></i>-{{post.date}}
                                                     <i class="fa fa-user"></i>-{{post.author.name}}</p>
                                             {%endfor%}
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- end blog-list -->
+                            <br>
+                             <img alt="" width="290" src="/static/assets/images/download.jpg">
                             </div><!-- end widget -->
+
                         </div><!-- end sidebar -->
                     <br>
 
- <img alt="" width="290" src="/static/assets/images/download.jpg">
+
  <div class="example1">
 
                     </div><!-- end col -->
@@ -151,7 +152,7 @@
                             <div class="blog-list clearfix">
 
                                 <div class="blog-box row">
-								 {% for post in all_post.items %}
+								 {% for post in all_post %}
 		    <div class="item mb-5">
 			    <div class="media">
 				    <img alt="." class="avatar" src="{{post.author.img}}">
@@ -173,7 +174,7 @@
 
                         {% if all_post.has_prev %} <a href="{{url_for('view',page=all_post.prev_num)}}" class="previous">&laquo; Previous</a>{% else %}<a href="" class="previous">&laquo; Previous</a>{% endif %}
                                     {% if all_post.has_next %}<a href="{{url_for('view', page=all_post.next_num)}}" class="next">Next &raquo;</a>{% else %}<a href="" class="next">Next &raquo;</a>{% endif %}
-
+  <br>
                     </div><!-- end col -->
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
@@ -198,6 +199,7 @@
                                         </div>
                                     </div>
                                 </div><!-- end blog-list -->
+                             <img alt="" width="290" src="/static/assets/images/download.jpg">
                             </div><!-- end widget -->
                         </div><!-- end sidebar -->
                     <br>

@@ -8,7 +8,6 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
     img=db.Column(db.Text)
     posts = relationship("BlogPost", back_populates="author")
     issueposts=relationship("IssueBlogPost", back_populates="author")
@@ -57,3 +56,4 @@ class IssueComment(db.Model):
     parent_post = relationship("IssueBlogPost", back_populates="comments")
     comment_author = relationship("User", back_populates="issuecomments")
     text = db.Column(db.Text, nullable=False)
+

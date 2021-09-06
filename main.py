@@ -12,8 +12,8 @@ import os
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['HEROKU_POSTGRESQL_COPPER_URL']
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 Bootstrap(app)
@@ -170,7 +170,7 @@ def issues(post_id):
         db.session.commit()
     return render_template("blog-posst.html",all_post=issuepost,comment=comment)
 
-@app.route("/<int:post_id>", methods=["GET", "POST"])
+@app.route("/<post_id>", methods=["GET","POST"])
 def show_blog(post_id):
     comment = CommentForm()
     request_post = BlogPost.query.get(post_id)
@@ -182,6 +182,7 @@ def show_blog(post_id):
             text=comment.comment_text.data,
             comment_author=current_user,
             parent_post=request_post
+
         )
         db.session.add(new_comment)
         db.session.commit()
@@ -193,7 +194,8 @@ def show_blog(post_id):
 def search():
     if request.method == 'POST':
         search = request.form['search']
-        search_query = BlogPost.query.filter(BlogPost.title.contains('%' + search.title() + '%')).all()
+        print(search)
+        search_query = BlogPost.query.filter(BlogPost.title.contains(search.title())).all()
         issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
         print(search_query)
         return render_template("index.html", all_post=search_query, issue_post=issues)
