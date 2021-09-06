@@ -50,9 +50,8 @@ def load_user(user_id):
 
 @app.route('/',methods=["GET","POST"])
 def start():
-    # return "working"
-    return redirect(url_for('registration'))
-    # return redirect(url_for('view',page=1))
+    db.create_all()
+    return redirect(url_for('view',page=1))
 
 
 
@@ -61,7 +60,8 @@ def view(page):
     per_page = 5
     posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
-    return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
+    return "working"
+    # return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
 
 
 
