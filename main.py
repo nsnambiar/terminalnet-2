@@ -55,7 +55,7 @@ def start():
     return redirect(url_for('view',page=1))
 
 
-@app.route('/Page<int:page>',methods=['GET'])
+@app.route('/Page/<int:page>',methods=['GET'])
 def view(page):
     per_page = 5
     posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
