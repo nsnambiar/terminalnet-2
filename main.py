@@ -50,12 +50,7 @@ def load_user(user_id):
 
 @app.route('/',methods=["GET","POST"])
 def start():
-    try:
-        db.create_all()
-    except Exception as e:
-        print("error occured" + e)
-    finally:
-        return redirect(url_for('view',page=1))
+    return redirect(url_for('view',page=1))
 
 
 
