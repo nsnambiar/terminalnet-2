@@ -50,7 +50,7 @@ def load_user(user_id):
 
 @app.route('/',methods=["GET","POST"])
 def start():
-    db.create_all()
+    # db.create_all()
     return "working"
     # return redirect(url_for('view',page=1))
 
