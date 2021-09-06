@@ -12,8 +12,8 @@ import os
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['HEROKU_POSTGRESQL_COPPER_URL']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['HEROKU_POSTGRESQL_COPPER_URL']
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 Bootstrap(app)
@@ -58,7 +58,7 @@ def start():
 @app.route('/Page<int:page>',methods=['GET'])
 def view(page):
     per_page = 5
-    posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
+    posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page)
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
     return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
 
