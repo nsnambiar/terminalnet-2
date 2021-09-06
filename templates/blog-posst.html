@@ -9,8 +9,9 @@
 }
 
 </style>
-<article class="blog-post px-3 py-5 p-md-5">
+
     {% if all_post.img == True %}
+<article class="blog-post px-3 py-5 p-md-5">
 		    <div class="container">
                     <center> <h2 class="title mb-2">{{all_post.title}}</h2>
 				    <div class="meta mb-3"><h6 class="date">Published on {{all_post.date}}.Published By {{all_post.author.name}} </h6></div>
@@ -21,8 +22,7 @@
                     </center><div class="boxed">
                       <a href=""><img  src="data:;base64,{{all_post.img|b64encode}}"  class="img-fluid" width="500" height="250" align="center"></a>
                     <p>{{all_post.body|safe}}</p></div>
-		    </div><!--//container-->
-
+                </div><!--//container-->
                 <br>
 				  <div class="row">
                             <div class="col-md-12">
@@ -32,56 +32,67 @@
                                   {{ wtf.quick_form(comment, novalidate=True, button_map={"submit": "primary"}) }}
                                    </div>
                                     <br>
-                    <ul class="commentList">
-                            <div class="commenterImage">
-                                {% for comment in all_post.comments %}
-                            <div class="commentText">
-                                 <img alt="." class="avatar" src="{{comment.comment_author.img}}">&nbsp;&nbsp;{{comment.text|safe}}<br>
-                                <span class="date sub-text"> .{{comment.comment_author.name}} <i class="fa fa-envelope"></i>{{comment.comment_author.email}}</span>
-                            </div>
-                                <hr>
+                                <ul class="commentList">
+                                    <div class="commenterImage">
+                                    {% for comment in all_post.comments %}
+                                    <div class="commentText">
+                                    <img alt="." class="avatar" src="{{comment.comment_author.img}}">&nbsp;&nbsp;{{comment.text|safe}}<br>
+                                    <span class="date sub-text"> .{{comment.comment_author.name}} <i class="fa fa-envelope"></i>{{comment.comment_author.email}}</span>
+                                    </div>
+                                    </div>
+                                    </ul>
+                                    <hr>
+
                                 {%endfor%}
-                    </ul>
+
                                 </nav>
                             </div>
                   </div>
+                    </center>
             </div>
+</article>
+{% endif %}
 
-                                    {% else %}
-                                    		    <div class="container">
-			     <center><header class="blog-post-header">
-				    <h2 class="title mb-2">{{all_post.title}}</h2>
+
+{% if all_post.img == False  %}
+<article class="blog-post px-3 py-5 p-md-5">
+		    <div class="container">
+                    <center> <h2 class="title mb-2">{{all_post.title}}</h2>
 				    <div class="meta mb-3"><h6 class="date">Published on {{all_post.date}}.Published By {{all_post.author.name}} </h6></div>
-				 </header> </center>
 			    <div class="blog-post-body">
 				    <center><figure class="blog-banner">
 				        </figure>
-                    <h5 class="title mb-2">{{all_post.subtitle}}</h5>
+                    <h6 class="title mb-2">{{all_post.subtitle}}</h6>
                     </center><div class="boxed">
                       <p>{{all_post.body|safe}}</p></div>
-		    </div><!--//container-->
+                </div><!--//container-->
+                <br>
 				  <div class="row">
                             <div class="col-md-12">
-                                <nav aria-label="Page navigation"><hr><hr>
+                                <nav aria-label="Page navigation">
                                     <h4>Leave a Comment</h4>
                                   <div class="">
                                   {{ wtf.quick_form(comment, novalidate=True, button_map={"submit": "primary"}) }}
                                    </div>
                                     <br>
-                    <ul class="commentList">
-                            <div class="commenterImage">
-                                {% for comment in all_post.comments %}
-                            <div class="commentText">
-                                <img alt="." class="avatar" src="{{comment.comment_author.img}}">&nbsp;&nbsp;{{comment.text|safe}}<br>
-                                <span class="date sub-text">  {{comment.comment_author.name}}-({{comment.comment_author.email}})</span>
-                            </div>
-                                <hr>
+                                <ul class="commentList">
+                                    <div class="commenterImage">
+                                    {% for comment in all_post.comments %}
+                                    <div class="commentText">
+                                    <img alt="." class="avatar" src="{{comment.comment_author.img}}">&nbsp;&nbsp;{{comment.text|safe}}<br>
+                                    <span class="date sub-text"> .{{comment.comment_author.name}} <i class="fa fa-envelope"></i>{{comment.comment_author.email}}</span>
+                                    </div>
+                                    </div>
+                                    </ul>
+                                    <hr>
+
                                 {%endfor%}
+
+                                </nav>
                             </div>
-                    </ul>
-                                    {% endif %}
-
-
-	    </article>
-
+                  </div>
+                    </center>
+            </div>
+</article>
+{% endif %}
 {% include "footer.html" %}
