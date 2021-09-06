@@ -52,10 +52,10 @@ def load_user(user_id):
 @app.route('/',methods=["GET","POST"])
 def start():
     db.create_all()
-    return redirect(url_for('view',page=1))
+    return redirect(url_for('view',page=0))
 
 
-@app.route('/Page:<int:page>',methods=['GET'])
+@app.route('/Page:<page>',methods=['GET'])
 def view(page):
     per_page = 5
     posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
