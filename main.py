@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, redirect, url_for, flash,abort,request
 from flask_ckeditor import CKEditor
 from flask_bootstrap import Bootstrap
@@ -52,7 +53,7 @@ def load_user(user_id):
 @app.route('/',methods=["GET","POST"])
 def start():
     db.create_all()
-    posts = BlogPost.query.all()
+    posts = BlogPost.query.order_by(BlogPost.date.desc()).all()
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
     return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
 
@@ -220,4 +221,3 @@ def google_authorize():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
