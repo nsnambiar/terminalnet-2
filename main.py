@@ -53,9 +53,9 @@ def load_user(user_id):
 @app.route('/',methods=["GET","POST"])
 def start():
     db.create_all()
-    posts = BlogPost.query.order_by(BlogPost.date.desc()).all()
+    posts = BlogPost.query.order_by(desc(BlogPost.date)).all()
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
-    return render_template("registration.html")
+    return render_template("registration.html", all_post=posts, currentuser=current_user, issue_post=issues)
 
 
 
