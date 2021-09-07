@@ -52,21 +52,21 @@ def load_user(user_id):
 @app.route('/',methods=["GET","POST"])
 def start():
     db.create_all()
-    page = request.args.get('Page', 1, type=int)
+     return redirect(url_for("view",page=1))
+    
+    #page = request.args.get('Page', 1, type=int)
+    #per_page = 5
+    #posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page, per_page, error_out=False)
+    #issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
+    #return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
+
+@app.route('/Page',methods=['GET'])
+def view():
     per_page = 5
-    posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page, per_page, error_out=False)
+    posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
     return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
 
-
-# @app.route('/Page',methods=['GET'])
-# def view():
-#     page = request.args.get('Page', 1, type=int)
-#     per_page = 5
-#     posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
-#     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
-#     return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
-#
 
 
 
