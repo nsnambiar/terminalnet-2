@@ -56,19 +56,6 @@ def start():
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
     return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
 
-    # return redirect(url_for('view'))
-
-
-@app.route('/Page',methods=['GET'])
-def view():
-    page=1
-    per_page = 5
-    # posts = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page,per_page,error_out=False)
-    posts=BlogPost.query.order_by(BlogPost.date.desc()).all()
-    issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
-    return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
-
-
 
 
 @app.route("/Registration",methods=["GET","POST"])
