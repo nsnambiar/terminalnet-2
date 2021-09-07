@@ -9,7 +9,6 @@ from datetime import *
 from sqlalchemy import desc
 import base64
 import os
-from flask_paginate import Pagination, get_page_parameter
 
 app=Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
