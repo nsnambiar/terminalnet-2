@@ -52,7 +52,7 @@ def load_user(user_id):
 @app.route('/',methods=["GET","POST"])
 def start():
     db.create_all()
-     return redirect(url_for("view",page=1))
+    return redirect(url_for("view",page=1))
     
     #page = request.args.get('Page', 1, type=int)
     #per_page = 5
