@@ -55,7 +55,7 @@ def start():
     db.create_all()
     posts = BlogPost.query.order_by(BlogPost.date.desc()).all()
     issues = IssueBlogPost.query.order_by(desc(IssueBlogPost.id)).all()
-    return render_template("index.html", all_post=posts, currentuser=current_user, issue_post=issues)
+    return render_template("registration.html")
 
 
 
